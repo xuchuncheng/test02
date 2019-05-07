@@ -3,8 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="../js/JavaScript/jquery.js"></script>
+    <script src="../js/jquery/jquery-1.12.4.min.js"></script>
+    <script src="../js/jquery/jquery.form.js"></script>
+    <script src="../js/jquery/jquery.cookie.js"></script>
+    <script src="../js/moment/moment.min.js"></script>
+    <script src="../js/numeral/numeral.min.js"></script>
+    <script src="../js/numeral/chs.min.js"></script>
+    <script src="../js/common/base.js"></script>
+    <script src="../js/common/normal.js"></script>
 </head>
 <body>
+<div align="center">
+    <div style="margin: 0 auto;margin-top: 250px">
+        <form id="tt">
+            <input type="text" name="name">
+            <input type="text" name="password">
+            <input type="text" name="birthday">
 
+        </form>
+    </div>
+</div>
 </body>
+<script>
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.parent.window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    $(function () {
+        init()
+    });
+
+    function init() {
+        var id = getUrlParam("id");
+        if (id != null && id !== undefined) {
+            $.post("getOneUser", {id: id}, function (re) {
+                var obj = $.dealJSONObj(re)
+                if (!obj.code) {
+                    /**
+                     * 渲染表单
+                     */
+                    $("#tt").formRenderByObj(obj.data)
+
+                }
+            })
+        }
+    }
+</script>
 </html>
