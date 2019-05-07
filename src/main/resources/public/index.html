@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <script src="../js/JavaScript/jquery.js"></script>
+    <script src="../js/jquery/jquery-1.12.4.min.js"></script>
+    <script src="../js/jquery/jquery.form.js"></script>
+    <script src="../js/jquery/jquery.cookie.js"></script>
+    <script src="../js/moment/moment.min.js"></script>
+    <script src="../js/numeral/numeral.min.js"></script>
+    <script src="../js/numeral/chs.min.js"></script>
+    <script src="../js/common/base.js"></script>
+    <script src="../js/common/normal.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+<table id="tt" border="2" style="margin-top: 250px ;margin-left: 23%">
+    <thead>
+    <tr>
+        <td align="center" colspan="6">
+            <h2>详情列表</h2>
+            <span onclick="addEve()">新增</span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+           编号
+        </td>
+        <td>
+           名称
+        </td>
+        <td>
+            密码
+        </td>
+        <td>
+        注册时间
+        </td>
+        <td colspan="2" align="center">
+            操作
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+</table>
+</body>
+</html>
+<script>
+    $(function () {
+        init();
+    });
+
+    function init() {
+        $.post("initTab", null).always(afterInit)
+    }
+
+    function afterInit(re) {
+        var obj = $.dealJSONObj(re);
+        // language=HTML
+        var template = "<tr>\n    <td>{0}</td>\n    <td>{1}</td>\n    <td>{2}</td>\n    <td>{3}</td>\n    <td><span onclick=\'del({0})\'>删除</span></td>\n    <td><span onclick=\'upd({0})\'>修改</span></td>\n</tr>";
+        var data = "";
+        $.each(obj.data, function (k, v) {
+            data += template.formatStr(
+                v.id,
+                v.name,
+                v.password,
+                moment(v.lastModifyTime).format('YYYY-MM-DD hh:mm:ss')//时间日期
+            );
+        });
+        $("#tt tbody").empty().html(data);
+    }
+
+    function addEve() {
+        window.location.href = "register.html"
+    }
+    function del(a) {
+        if (confirm("你确定删除此条记录吗？")){
+            $.post("delUser",{id:a}).always(afterDel)
+        }
+    }
+    function afterDel(re) {
+        var obj = $.dealJSONObj(re);
+        if (!obj.code){
+            alert("删除成功")
+            init();
+        }
+    }
+    function upd(a) {
+        alert("upd" +a )
+
+    }
+</script>

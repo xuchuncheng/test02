@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/JavaScript/jquery.js"></script>
+    <script src="../js/jquery/jquery-1.12.4.min.js"></script>
+    <script src="../js/jquery/jquery.form.js"></script>
+    <script src="../js/jquery/jquery.cookie.js"></script>
+    <script src="../js/moment/moment.min.js"></script>
+    <script src="../js/numeral/numeral.min.js"></script>
+    <script src="../js/numeral/chs.min.js"></script>
+    <script src="../js/common/base.js"></script>
+    <script src="../js/common/normal.js"></script>
+</head>
+<body>
+<div align="center">
+    <!--//username    password    sex     email-->
+    <div style="margin-top: 250px">
+
+        <table id="tab_rep" border="5">
+            <thead>
+            <tr>
+                <td align="center" colspan="3"><h2>用户注册</h2></td>
+            </tr>
+            </thead>
+            <tbody>
+            <form id="ff">
+                <tr>
+                    <td>登录账号：</td>
+                    <td><input type="text" name="name" id="username"></td>
+                    <td><span style="color: red">(*)</span></td>
+                </tr>
+                <tr>
+                    <td>登录密码：</td>
+                    <td><input type="password" name="password" id="password"></td>
+                    <td><span style="color: red">(*)</span></td>
+                </tr>
+            </form>
+            <tr>
+                <td>验证密码：</td>
+                <td><input type="password" name="repassword" id="repassword" onblur="yaz()"></td>
+                <td><span style="color: red">(*)</span></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3" align="center"><input type="button" value="注册" id="zc" onclick="registertion()">
+                    <input type="button" value="返回" onclick="fanhui()"></td>
+            </tr>
+
+            </tfoot>
+        </table>
+
+    </div>
+</div>
+</body>
+<script>
+    $(function () {
+        $("#zc").attr('disabled', true);
+    });
+
+    function yaz() {
+        if ($("#password").val() === $("#repassword").val()) {
+            $("#zc").attr('disabled', false);
+        }
+    }
+
+    function registertion() {
+        $.post("register", $("#ff").serialize(), function (data) {
+            var obj = $.dealJSONObj(data);
+            if (!obj.code) {
+                if (confirm("恭喜您，会员" + $("#username").val() + "添加成功！是否立即返回？")) {
+                    window.location.href = 'index.html';
+                }else {
+                    $("#ff").clean()
+                }
+            }
+        })
+    }
+
+    function fanhui() {
+        window.location.href = 'index.html'
+    }
+</script>
+</html>

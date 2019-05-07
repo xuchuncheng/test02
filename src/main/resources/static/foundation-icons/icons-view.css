@@ -1,0 +1,84 @@
+.container {
+    margin: 0 auto;
+    min-width: 880px;
+    padding: 0 40px;
+    width: 80%;
+}
+
+.interchange-body {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    background: white;
+}
+
+.interchange-body h2 {
+    border-bottom: 1px solid #DDD;
+    padding-bottom: 10px;
+    margin: 20px 0;
+}
+
+[class*="block-grid-"] {
+    display: block;
+    padding: 0;
+    margin: 0 -0.625em;
+}
+
+[class*="block-grid-"]>li {
+    display: inline-block;
+    height: auto;
+    width: 18%;
+    padding: 0 0.625em 1.25em;
+}
+
+.interchange-body ul {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 1.25em;
+    list-style-position: outside;
+    font-family: inherit;
+}
+
+.interchange-body ul li p {
+    cursor: pointer;
+}
+
+[class*="fi-"] {
+    color: #19a09d;
+    font-size: 18px;
+    background-image:none!important;
+    overflow: visible!important;
+}
+.icon-blue {
+    color: #3c8dbc;
+}
+
+.icon-purple {
+    color: #605ca8;
+}
+
+.icon-green {
+    color: #00a65a;
+}
+
+.icon-red {
+    color: #dd4b39;
+}
+
+.icon-yellow {
+    color: #f39c12;
+}
+
+.icon-gray {
+    color: #9C9C9C;
+}
+
+.icon-black {
+    color: #000000;
+}
+#layout_west_tree li div{padding:5px 5px 3px 10px;}
+#layout_west_tree .tree-title{
+    margin-top: 2px;
+}
+.tabs [class*="fi-"] {
+    margin-top: -12px;
+}
